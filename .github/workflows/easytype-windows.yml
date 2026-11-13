@@ -1,0 +1,21 @@
+name: "EasyType - Windows x64 installer"
+
+# Run manually: Actions -> "EasyType - Windows x64 installer" -> Run workflow.
+# Produces the NSIS setup .exe as a downloadable build artifact. No signing
+# secrets are required (the installer will be unsigned).
+on: workflow_dispatch
+
+jobs:
+  windows-x64:
+    permissions:
+      contents: write
+    uses: ./.github/workflows/build.yml
+    with:
+      platform: "windows-latest"
+      target: "x86_64-pc-windows-msvc"
+      build-args: ""
+      sign-binaries: false
+      asset-prefix: "easytype"
+      upload-artifacts: true
+      is-debug-build: false
+    secrets: inherit
